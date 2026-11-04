@@ -1,0 +1,110 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job | CareerConnect</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .back {
+            color: #2563eb;
+            text-decoration: none;
+            margin-left: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Post a New Job</h1>
+        <p>Enter the job details below.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="title">Job Title</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="description">Job Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="skills_required">Skills Required</label>
+            <textarea id="skills_required" name="skills_required" required></textarea>
+
+            <label for="salary">Salary</label>
+            <input type="text" id="salary" name="salary">
+
+            <label for="job_type">Job Type</label>
+            <select id="job_type" name="job_type" required>
+                <option value="full_time">Full Time</option>
+                <option value="part_time">Part Time</option>
+                <option value="internship">Internship</option>
+            </select>
+
+            <button type="submit">Post Job</button>
+
+            <a href="{% url 'recruiter_dashboard' %}" class="back">
+                Back to Dashboard
+            </a>
+        </form>
+    </div>
+</body>
+</html>
+```

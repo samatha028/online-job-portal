@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job | CareerConnect</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edit Job</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Job Title</label>
+            <input type="text" name="title"
+                   value="{{ job.title }}" required>
+
+            <label>Company Name</label>
+            <input type="text" name="company"
+                   value="{{ job.company }}" required>
+
+            <label>Location</label>
+            <input type="text" name="location"
+                   value="{{ job.location }}" required>
+
+            <label>Job Description</label>
+            <textarea name="description" required>{{ job.description }}</textarea>
+
+            <label>Skills Required</label>
+            <textarea name="skills_required" required>{{ job.skills_required }}</textarea>
+
+            <label>Salary</label>
+            <input type="text" name="salary"
+                   value="{{ job.salary }}">
+
+            <label>Job Type</label>
+            <select name="job_type" required>
+                <option value="full_time"
+                    {% if job.job_type == 'full_time' %}selected{% endif %}>
+                    Full Time
+                </option>
+
+                <option value="part_time"
+                    {% if job.job_type == 'part_time' %}selected{% endif %}>
+                    Part Time
+                </option>
+
+                <option value="internship"
+                    {% if job.job_type == 'internship' %}selected{% endif %}>
+                    Internship
+                </option>
+            </select>
+
+            <button type="submit">Update Job</button>
+        </form>
+
+        <p>
+            <a href="{% url 'recruiter_dashboard' %}">
+                Back to Dashboard
+            </a>
+        </p>
+    </div>
+</body>
+</html>

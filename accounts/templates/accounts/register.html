@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect - Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px #0002;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>CareerConnect</h2>
+    <h3>Create Account</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard | CareerConnect</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        .job-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .button, .delete-button, .applications-button {
+            display: inline-block;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            margin: 3px;
+        }
+
+        .button {
+            background: #2563eb;
+        }
+
+        .delete-button {
+            background: #dc2626;
+        }
+
+        .applications-button {
+            background: #059669;
+        }
+
+        .empty {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CareerConnect - Recruiter Dashboard</h1>
+
+        <p>
+            <a href="{% url 'post_job' %}" class="button">
+                + Post a New Job
+            </a>
+        </p>
+
+        <p>Welcome, {{ request.user.username }}!</p>
+
+        <h2>My Posted Jobs</h2>
+
+        {% for job in jobs %}
+            <div class="job-card">
+                <h3>{{ job.title }}</h3>
+
+                <p><b>Company:</b> {{ job.company }}</p>
+                <p><b>Location:</b> {{ job.location }}</p>
+                <p><b>Job Type:</b> {{ job.get_job_type_display }}</p>
+
+                <a href="{% url 'job_detail' job.id %}" class="button">
+                    View Job
+                </a>
+
+                <a href="{% url 'job_applications' job.id %}" class="applications-button">
+                    View Applications
+                </a>
+
+                <a href="{% url 'edit_job' job.id %}" class="button">
+                    Edit Job
+                </a>
+
+                <a href="{% url 'delete_job' job.id %}" class="delete-button">
+                    Delete Job
+                </a>
+            </div>
+        {% empty %}
+            <div class="empty">
+                <p>You have not posted any jobs yet.</p>
+            </div>
+        {% endfor %}
+
+        <p>
+            <a href="{% url 'job_list' %}" class="button">
+                Browse All Jobs
+            </a>
+        </p>
+    </div>
+</body>
+</html>

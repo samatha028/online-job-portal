@@ -1,0 +1,35 @@
+<h2>{{ job.title }}</h2>
+
+<p><b>Company:</b> {{ job.company }}</p>
+<p><b>Location:</b> {{ job.location }}</p>
+<p><b>Description:</b> {{ job.description }}</p>
+<p><b>Skills Required:</b> {{ job.skills_required }}</p>
+<p class="salary"><b>Salary:</b> {{ job.salary }}</p>
+<p><b>Job Type:</b> {{ job.get_job_type_display }}</p>
+<a href="{% url 'job_list' %}"
+   style="display:inline-block;
+          background:#1e3a8a;
+          color:white;
+          padding:12px 24px;
+          text-decoration:none;
+          border-radius:6px;
+          margin-top:15px;">
+    Back to Jobs
+</a>
+{% if user.is_authenticated %}
+    <form method="POST" action="{% url 'apply_job' job.id %}">
+        {% csrf_token %}
+        <button type="submit"
+            style="background:#2563eb; color:white; padding:12px 24px; border:none; border-radius:6px; cursor:pointer;">
+            Apply for Job
+        </button>
+    </form>
+{% else %}
+    <p>Please login to apply for this job.</p>
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
